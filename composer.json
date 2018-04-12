@@ -1,0 +1,23 @@
+{
+    "require": {
+        "php": "^7.0",
+        "cakephp/database": "dev-master",
+        "monolog/monolog": "dev-master",
+        "slim/slim": "^3.9",
+        "slim/twig-view": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Controller\\": "src/controller",
+            "Library\\": "src/library"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Test\\": "tests"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
