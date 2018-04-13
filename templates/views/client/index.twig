@@ -1,36 +1,27 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="utf-8"/>
-        <base href="{{ base_url() }}/"/>
-
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>        
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Cod</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for client in clients %}
-                        <tr>
-                            <td>{{client.id}}</td>
-                            <td>{{client.name}}</td>
-                            <td>{{client.phone}}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>                   
-            </div>         
-        </div>
-    </body>
-</html>
+{% extends "/layout/default.twig" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cod</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for client in clients %}
+                    <tr>
+                        <td>{{client.id}}</td>
+                        <td>{{client.name}}</td>
+                        <td>{{client.phone}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>                   
+        </div>          
+    </div>
+</div>
+{% endblock %}

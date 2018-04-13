@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="utf-8"/>
-        <base href="{{ base_url() }}/"/>
-    </head>
-    <body>
-        Current time: {{ now }}
-    </body>
-</html>
+{% extends "/layout/default.twig" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">        
+            Current time: {{ now }}        
+        </div>
+    </div>
+</div>
+{% endblock %}

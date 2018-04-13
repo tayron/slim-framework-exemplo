@@ -2,6 +2,14 @@
 
 $settings = [];
 
+// Database settings
+$settings['db']['host'] = '127.0.0.1';
+$settings['db']['username'] = 'root';
+$settings['db']['password'] = '123456';
+$settings['db']['database'] = 'slim';
+$settings['db']['charset'] = 'utf8';
+$settings['db']['collation'] = 'utf8_unicode_ci';
+
 // Slim settings
 $settings['displayErrorDetails'] = true;
 $settings['determineRouteBeforeAppMiddleware'] = true;
@@ -17,13 +25,5 @@ $settings['twig'] = [
     'cache_enabled' => false,
     'cache_path' =>  $settings['temp'] . '/twig-cache'
 ];
-
-// Database settings
-$settings['db']['host'] = '127.0.0.1';
-$settings['db']['username'] = 'root';
-$settings['db']['password'] = '123456';
-$settings['db']['database'] = 'slim';
-$settings['db']['charset'] = 'utf8';
-$settings['db']['collation'] = 'utf8_unicode_ci';
 
 return $settings;
