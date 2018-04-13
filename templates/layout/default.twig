@@ -3,14 +3,35 @@
     <head>
         <meta charset="utf-8"/>
         <base href="{{ base_url() }}/"/>
-
+        <title>{% block title %}{% endblock %} - My Webpage</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>        
     </head>
-    <body>
-        {% block content %}
-        {% endblock %}
+    <body>        
+        <div class="container-fluid">
+            <section id="menu">
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ include('layout/navbar.twig') }}
+                    </div>                    
+                </div>
+            </section>
+            
+            <section id="content">
+                {% block content %}{% endblock %}
+            </section>
+            
+            <section id="footer">
+                {% block footer %}
+                <div class="row">
+                    <div class="col-md-12">
+                        &copy; Copyright 2011 by <a href="http://domain.invalid/">you</a>.
+                    </div>                    
+                </div>
+                {% endblock %}
+            </section>
+        </div>
     </body>
 </html>

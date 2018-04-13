@@ -28,7 +28,7 @@ $settings['logger']['level'] = 400;
 // View settings
 $settings['twig'] = [
     'path' => $settings['root'] . '/templates',
-    'cache_enabled' => true,
+    'cache_enabled' =>false,
     'cache_path' =>  $settings['temp'] . '/twig-cache'
 ];
 

@@ -1,0 +1,9 @@
+{% macro input(type, label, name, maxlenght, value, placeholder) %}
+  <div class="form-group">
+    <input type="{{ type|default('text') }}" id="{{name}}" name="{{ name }}" maxlength="{{ maxlenght|default(85) }}" value="{{ value|e }}" placeholder="{{placeholder|e}}" class="form-control" />
+  </div>
+{% endmacro %}
+
+{% macro button(label) %}
+    <button class="btn btn-success">{{label}}</button>
+{% endmacro %}

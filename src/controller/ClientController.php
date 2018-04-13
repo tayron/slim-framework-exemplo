@@ -12,4 +12,9 @@ class ClientController extends AppController
             'clients' => $clients->find()
         ]);
     }
+    
+    public function add()
+    {
+        $this->view->render($this->response, '/views/client/add.twig');        
+    }
 }

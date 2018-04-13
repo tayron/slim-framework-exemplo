@@ -1,8 +1,31 @@
 {% extends "/layout/default.twig" %}
+{% import "/macros/form-elements.twig" as forms %}
+
+{% block title %}Clients{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
     <div class="row">
-        <div class="table-responsive">
+        <div class="col-md-12">
+            <h1>Client</h1>
+        </div>
+    </div>
+    <div class="row">        
+        <div class="col-md-12">
+            <form action="/action_page.php" class="form">            
+                <div class="row">        
+                    <div class="col-md-11">                
+                        {{ forms.input('text', 'Search', 'search', '3', null, 'Put your search here!') }}
+                    </div>
+                    <div class="col-md-1">                
+                        {{ forms.button('Search') }}
+                    </div>
+                </div>
+            </form>        
+        </div>            
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
                     <tr>
