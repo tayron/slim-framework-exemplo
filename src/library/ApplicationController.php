@@ -10,10 +10,6 @@ use Monolog\Logger;
 abstract class ApplicationController
 {
     /**
-     * @var App
-     */
-    protected $app;
-    /**
      * @var Twig
      */    
     protected $view;
@@ -31,9 +27,8 @@ abstract class ApplicationController
      */
     protected $logger;
 
-    public function __construct(App $slim, Request $request, Response $response, Twig $view, Logger $logger) 
+    public function __construct(Request $request, Response $response, Twig $view, Logger $logger) 
     {
-        $this->app = $slim;
         $this->request = $request;
         $this->response = $response;
         $this->view = $view;

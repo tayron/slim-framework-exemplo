@@ -15,3 +15,7 @@ Dependências:
  - "monolog/monolog": "dev-master",
  - "slim/slim": "^3.9",
  - "slim/twig-view": "dev-master"
+
+Na raiz do projeto deve-se criar os diretórios com permissão de escrita:
+ - /tmp
+ - /log 
