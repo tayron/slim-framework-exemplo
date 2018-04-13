@@ -25,6 +25,6 @@ $app->get('/time', function (Request $request, Response $response) {
 });
 
 $app->get('/databases', function (Request $request, Response $response) use ($app) {    
-    $controller = new \Controller\ClientController($app, $request, $response, $this->get('view'), $this->get('db'));
+    $controller = new \Controller\ClientController($app, $request, $response, $this->get('view'));
     $controller->index();
 });

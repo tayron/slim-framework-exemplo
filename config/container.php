@@ -54,21 +54,3 @@ $container['logger'] = function (Container $container) {
     
     return $logger;
 };
-
-$container['db'] = function (Container $container) {
-    $settings = $container->get('settings');
-
-    $driver = new Mysql([
-        'database' => $settings['db']['database'],
-        'username' => $settings['db']['username'],
-        'password' => $settings['db']['password']
-    ]);
-    
-    return new Connection([
-        'driver' => $driver
-    ]);
-};
-
-$container['pdo'] = function (Container $container) {
-    return $container->get('db')->getPdo();
-};

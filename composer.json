@@ -1,7 +1,7 @@
 {
     "require": {
         "php": "^7.0",
-        "cakephp/database": "dev-master",
+        "cakephp/orm": "dev-master",
         "monolog/monolog": "dev-master",
         "slim/slim": "^3.9",
         "slim/twig-view": "dev-master"

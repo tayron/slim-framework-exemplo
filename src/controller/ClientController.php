@@ -1,20 +1,17 @@
 <?php
 namespace Controller;
 use Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 class ClientController extends AppController
 {
     public function index()
     {
-        $statement = $this->database->execute('SELECT * FROM clients');
-
-        $listUsers = array();
-        while($row = $statement->fetch('assoc')) {
-            array_push($listUsers, $row);
-        }
+        $clients = TableRegistry::get('Clients');
+        $query = $clients->find();
     
         $this->view->render($this->response, '/views/client/index.twig', [
-            'clients' => $listUsers
+            'clients' => $clients->find()
         ]);
     }
 }
