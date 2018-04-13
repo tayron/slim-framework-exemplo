@@ -1,13 +1,11 @@
 <?php
 
-use Slim\Container;
-
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
-use Psr\Log\LoggerInterface;
-
-use Cake\Database\Connection;
-use Cake\Database\Driver\Mysql;
+use Slim\Container;
+use Slim\Http\Environment;
+use Slim\Views\Twig;
+use Slim\Views\TwigExtension;
 
 /* @var \Slim\App $app */
 $container = $app->getContainer();
@@ -16,7 +14,7 @@ $container = $app->getContainer();
 $container['environment'] = function () {
     $scriptName = $_SERVER['SCRIPT_NAME'];
     $_SERVER['SCRIPT_NAME'] = dirname(dirname($scriptName)) . '/' . basename($scriptName);
-    return new Slim\Http\Environment($_SERVER);
+    return new Environment($_SERVER);
 };
 
 // Register Twig View helper
@@ -24,7 +22,7 @@ $container['view'] = function (Container $container) {
     $settings = $container->get('settings');
     $viewPath = $settings['twig']['path'];
 
-    $twig = new \Slim\Views\Twig($viewPath, [
+    $twig = new Twig($viewPath, [
         'cache' => $settings['twig']['cache_enabled'] ? $settings['twig']['cache_path'] : false
     ]);
 
@@ -34,11 +32,12 @@ $container['view'] = function (Container $container) {
 
     // Instantiate and add Slim specific extension
     $basePath = rtrim(str_ireplace('index.php', '', $container->get('request')->getUri()->getBasePath()), '/');
-    $twig->addExtension(new Slim\Views\TwigExtension($container->get('router'), $basePath));
+    $twig->addExtension(new TwigExtension($container->get('router'), $basePath));
 
     return $twig;
 };
 
+// Register Monolog helper
 $container['logger'] = function (Container $container) {
     $settings = $container->get('settings');
     $logger = new Logger($settings['logger']['name']);

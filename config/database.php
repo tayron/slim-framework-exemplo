@@ -8,6 +8,7 @@ $settings = $container->get('settings');
 ConnectionManager::setConfig('default', [
 	'className' => 'Cake\Database\Connection',
 	'driver' => 'Cake\Database\Driver\Mysql',
+    'host' => $settings['db']['host'],
 	'database' => $settings['db']['database'],
 	'username' => $settings['db']['username'],
 	'password' => $settings['db']['password'],
