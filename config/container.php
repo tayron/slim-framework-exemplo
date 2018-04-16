@@ -7,6 +7,8 @@ use Slim\Http\Environment;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 
+use Core\View;
+
 /* @var \Slim\App $app */
 $container = $app->getContainer();
 
@@ -17,7 +19,7 @@ $container['environment'] = function () {
     return new Environment($_SERVER);
 };
 
-// Register Twig View helper
+// Register Template View helper
 $container['view'] = function (Container $container) {
     $settings = $container->get('settings');
     $viewPath = $settings['twig']['path'];
@@ -34,7 +36,7 @@ $container['view'] = function (Container $container) {
     $basePath = rtrim(str_ireplace('index.php', '', $container->get('request')->getUri()->getBasePath()), '/');
     $twig->addExtension(new TwigExtension($container->get('router'), $basePath));
 
-    return $twig;
+    return new View($twig);
 };
 
 // Register Monolog helper
@@ -51,5 +53,5 @@ $container['logger'] = function (Container $container) {
     $handler = new RotatingFileHandler($logFile, 0, $level, true, 0775);
     $logger->pushHandler($handler);
     
-    return $logger;
+    return new Core\Logger($logger);
 };

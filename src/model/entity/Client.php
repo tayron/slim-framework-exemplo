@@ -3,7 +3,7 @@ namespace Model\Entity;
 
 use Cake\ORM\Entity;
 
-class Clients extends Entity
+class Client extends Entity
 {
 
 }

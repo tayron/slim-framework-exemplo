@@ -1,0 +1,31 @@
+{% extends "/layout/default.twig" %}
+{% import "/macros/form-elements.twig" as forms %}
+
+{% block title %}Clients{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Client</h1>
+        </div>
+    </div>
+    <div class="row">        
+        <div class="col-md-12">
+            <form class="form" method="post">            
+                <div class="row">        
+                    <div class="col-md-6">                
+                        {{ forms.input('text', 'Name', 'name', '85', client.get('name'), 'Put your name here!') }}
+                    </div>
+                    <div class="col-md-6">                
+                        {{ forms.input('text', 'Phone', 'phone', '15', client.get('phone'), 'Put your phone here!') }}
+                    </div>                    
+                    <div class="col-md-1">                
+                        {{ forms.button('Add new Client') }}
+                    </div>
+                </div>
+            </form>        
+        </div>            
+    </div>
+</div>
+{% endblock %}

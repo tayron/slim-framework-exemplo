@@ -9,7 +9,8 @@
     "autoload": {
         "psr-4": {
             "Controller\\": "src/controller",
-            "Library\\": "src/library"
+            "Core\\": "src/core",
+            "Model\\": "src/model"
         }
     },
     "autoload-dev": {

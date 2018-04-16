@@ -5,7 +5,15 @@
         </div>
         <ul class="nav navbar-nav">
             <li href="/" class="{% if app.request.attributes.get('_route') starts with '/' %}active{% endif %}"><a href="/">Home</a></li>
-            <li><a href="clients">Client</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">
+                    Client <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="clients/list">List</a></li>
+                    <li><a href="clients/add">Add</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>

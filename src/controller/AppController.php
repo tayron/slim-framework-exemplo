@@ -1,7 +1,7 @@
 <?php
-
 namespace Controller;
-use Library\ApplicationController;
+
+use Core\ApplicationController;
 
 class AppController extends ApplicationController
 {
