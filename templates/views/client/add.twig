@@ -12,7 +12,21 @@
     </div>
     <div class="row">        
         <div class="col-md-12">
-            <form class="form" method="post">            
+            <form class="form" method="post"> 
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if success is not empty %}
+                        <div class="alert alert-success" role="alert">
+                            {{success}}
+                        </div>
+                        {% endif %}
+                        {% if error is not empty %}
+                        <div class="alert alert-danger" role="alert">
+                            {{error}}
+                        </div>                        
+                        {% endif %}
+                    </div>
+                </div>
                 <div class="row">        
                     <div class="col-md-6">                
                         {{ forms.input('text', 'Name', 'name', '85', client.get('name'), 'Put your name here!') }}

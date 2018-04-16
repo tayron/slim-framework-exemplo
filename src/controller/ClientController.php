@@ -17,6 +17,8 @@ class ClientController extends AppController
     public function add()
     {        
         $client = new Client();
+        $success = '';
+        $erro = '';        
         
         if($this->request->isPost()){
             $name = $this->request->getParam('name');
@@ -27,15 +29,18 @@ class ClientController extends AppController
             
             $clientTable = TableRegistry::get('Clients');
             
-            if($clientTable->save($client)){
-                header("Location:  /clients/list");
-//                return $this->response->withRedirect('/'); 
-            }else{
-                echo 'Deu merda';
-            }
-                
+            try {
+                $clientTable->save($client);
+                $success = 'Record inserted successfully';
+            } catch (\Exception $e) {
+                $erro = $e->getMessage();
+            }   
         }       
         
-        $this->view->render('/views/client/add.twig', ['client' => $client]);        
+        $this->view->render('/views/client/add.twig', [
+            'client' => $client,
+            'success' => $success,
+            'erro' => $erro            
+        ]);        
     }
 }

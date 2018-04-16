@@ -1,13 +1,13 @@
 <?php
 namespace Core;
 
-use Monolog\Logger;
+use Monolog\Logger as MonoLogger;
 
 class Logger 
 {
     private $logger;
     
-    public function __construct(Logger $logger)
+    public function __construct(MonoLogger $logger)
     {
         $this->logger = $logger;
     }
