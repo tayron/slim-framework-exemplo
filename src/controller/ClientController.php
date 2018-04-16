@@ -10,7 +10,9 @@ class ClientController extends AppController
     {
         $clients = TableRegistry::get('Clients');
         $this->view->render('/views/client/index.twig', [
-            'clients' => $clients->find()
+            'clients' => $clients->find(),
+            'success' => $this->request->getQueryParam('success'),
+            'error' => $this->request->getQueryParam('error')
         ]);
     }
     
@@ -76,4 +78,17 @@ class ClientController extends AppController
             'erro' => $erro            
         ]);          
     }
+    
+    public function delete($id)
+    {
+        $clients = TableRegistry::get('Clients');        
+        
+        try {
+            $client = $clients->get($id);        
+            $clients->delete($client);
+            return $this->response->withRedirect('/clients/list?success=Record was deleted successfully');
+        } catch (\Exception $e) {
+            return $this->response->withRedirect('/clients/list?error=' . $e->getMessage());
+        }           
+    }    
 }

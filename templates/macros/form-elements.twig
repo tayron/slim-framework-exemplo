@@ -7,3 +7,37 @@
 {% macro button(label) %}
     <button class="btn btn-success">{{label}}</button>
 {% endmacro %}
+
+{% macro table(headers, dataObject) %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {% for header in headers %}
+                <th>{{header}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for object in dataObject %}
+            <tr>
+                {% for key,header in headers %}
+                <td>{{object[key]}}</td>
+                {% endfor %}
+                <td>
+                    <a href="/clients/edit/{{object.id}}" class="btn btn-info btn-sm" title="Edit record #{{object.id}}">
+                        <i class="glyphicon glyphicon-pencil"></i>
+                    </a>
+
+                    <form name="post_{{object.id}}" style="display:none;" method="post" action="/clients/delete/{{object.id}}">
+                        <input type="hidden" name="_method" value="POST">
+                    </form>
+                                
+                    <a href="#" class="btn btn-danger btn-sm" title="Excluir" onclick="if (confirm(&quot;Tem certeza que deseja excluir o registro # {{object.id}}?&quot;)) { document.post_{{object.id}}.submit(); } event.returnValue = false; return false;">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>                    
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table> 
+{% endmacro %}

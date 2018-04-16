@@ -10,6 +10,20 @@
             <h1>Client</h1>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% if success is not empty %}
+            <div class="alert alert-success" role="alert">
+                {{success}}
+            </div>
+            {% endif %}
+            {% if error is not empty %}
+            <div class="alert alert-danger" role="alert">
+                {{error}}
+            </div>                        
+            {% endif %}
+        </div>
+    </div>    
     <div class="row">        
         <div class="col-md-12">
             <form action="/clients" class="form" method="get">            
@@ -26,30 +40,8 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Cod</th>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for client in clients %}
-                    <tr>
-                        <td>{{client.id}}</td>
-                        <td>{{client.name}}</td>
-                        <td>{{client.phone}}</td>
-                        <td>
-                            <a href="/clients/edit/{{client.id}}" title="Edit record #{{client.id}}">
-                                <span class="glyphicon glyphicon-pencil"></span></p>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>                   
+            {% set headers = {'id': 'Cod', 'name': 'Name', 'phone': 'Phone'} %}
+            {{ forms.table(headers, clients) }}
         </div>          
     </div>
 </div>
