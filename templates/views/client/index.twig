@@ -32,6 +32,7 @@
                         <th>Cod</th>
                         <th>Name</th>
                         <th>Phone</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +41,11 @@
                         <td>{{client.id}}</td>
                         <td>{{client.name}}</td>
                         <td>{{client.phone}}</td>
+                        <td>
+                            <a href="/clients/edit/{{client.id}}" title="Edit record #{{client.id}}">
+                                <span class="glyphicon glyphicon-pencil"></span></p>
+                            </a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
