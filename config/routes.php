@@ -12,29 +12,19 @@ $app->get('/', function (Request $request, Response $response) use ($app) {
 // Router to Client Controller
 $app->group('/clients', function() use ($app) {
     
-   $app->get('/edit/{id:[0-9]+}', function (Request $request, Response $response, array $args){    
+    $app->map(['GET', 'POST'], '/add', function (Request $request, Response $response) {
         $controller = ControllerFactory::create('Client', $request, $response, $this);
-        return $controller->edit($args['id']);
+        return $controller->add();
     });
     
-   $app->post('/edit/{id:[0-9]+}', function (Request $request, Response $response, array $args){    
+    $app->map(['GET', 'POST'], '/edit/{id:[0-9]+}', function (Request $request, Response $response, array $args) {
         $controller = ControllerFactory::create('Client', $request, $response, $this);
-        return $controller->edit($args['id']);
-    });    
-    
+        return $controller->edit($args['id']);        
+    });
+
     $app->get('/list', function (Request $request, Response $response){    
         $controller = ControllerFactory::create('Client', $request, $response, $this);
         return $controller->index();
     });
-
-    $app->get('/add', function (Request $request, Response $response){    
-        $controller = ControllerFactory::create('Client', $request, $response, $this);
-        return $controller->add();
-    });
-
-    $app->post('/add', function (Request $request, Response $response){    
-        $controller = ControllerFactory::create('Client', $request, $response, $this);
-        return $controller->add();
-    });    
 });
 
