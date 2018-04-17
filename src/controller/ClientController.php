@@ -20,62 +20,65 @@ class ClientController extends AppController
     {        
         $client = new Client();
         $success = '';
-        $erro = '';        
+        $error = '';  
+        $fieldsErros = '';
         
         if($this->request->isPost()){
-            $name = $this->request->getParam('name');
-            $phone = $this->request->getParam('phone');
+            try {                
+                $clientTable = TableRegistry::get('Clients');
+                $client = $clientTable->patchEntity($client, $this->request->getParams());
+
+                if ($client->getErrors()) {
+                    $fieldsErros = $client->getErrors();
+                    throw new \Exception('Please correct the fields below');
+                }
             
-            $client->set('name', $this->request->getParam('name'));
-            $client->set('phone', $this->request->getParam('phone'));
-            
-            $clientTable = TableRegistry::get('Clients');
-            
-            try {
                 $clientTable->save($client);
                 $success = 'Record inserted successfully';
             } catch (\Exception $e) {
-                $erro = $e->getMessage();
+                $error = $e->getMessage();
             }   
         }       
         
         $this->view->render('/views/client/add.twig', [
             'client' => $client,
             'success' => $success,
-            'erro' => $erro            
+            'error' => $error,
+            'fieldsErros' => $fieldsErros            
         ]);        
     }
     
     public function edit($id)
     {
         $success = '';
-        $erro = '';        
+        $error = '';    
+        $fieldsErros = '';
         
-        $clients = TableRegistry::get('Clients');
+        $clientTable = TableRegistry::get('Clients');
         
-        $client = $clients->get($id);
+        $client = $clientTable->get($id);
 
         if($this->request->isPost()){
-            $name = $this->request->getParam('name');
-            $phone = $this->request->getParam('phone');
-            
-            $client->set('name', $this->request->getParam('name'));
-            $client->set('phone', $this->request->getParam('phone'));
-            
-            $clientTable = TableRegistry::get('Clients');
-            
             try {
+                $client = $clientTable->patchEntity($client, $this->request->getParams());
+
+                if ($client->getErrors()) {
+                    $fieldsErros = $client->getErrors();
+                    throw new \Exception('Please correct the fields below');
+                }
+            
                 $clientTable->save($client);
                 $success = 'Record inserted successfully';
             } catch (\Exception $e) {
-                $erro = $e->getMessage();
+                $error = $e->getMessage();
             }   
         }       
-        
+
         $this->view->render('/views/client/edit.twig', [
             'client' => $client,
             'success' => $success,
-            'erro' => $erro            
+            'error' => $error,
+            'fieldsErros' => $fieldsErros            
         ]);          
     }
     
@@ -86,9 +89,9 @@ class ClientController extends AppController
         try {
             $client = $clients->get($id);        
             $clients->delete($client);
-            return $this->response->withRedirect('/clients/list?success=Record was deleted successfully');
+            return $this->response->withRedirect('/clients/index?success=Record was deleted successfully');
         } catch (\Exception $e) {
-            return $this->response->withRedirect('/clients/list?error=' . $e->getMessage());
+            return $this->response->withRedirect('/clients/index?error=' . $e->getMessage());
         }           
     }    
 }

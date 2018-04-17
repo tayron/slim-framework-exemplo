@@ -27,7 +27,7 @@ $app->group('/clients', function() use ($app) {
         return $controller->index();
     });
     
-    $app->get('/list', function (Request $request, Response $response){    
+    $app->get('/index', function (Request $request, Response $response){    
         $controller = ControllerFactory::create('Client', $request, $response, $this);
         return $controller->index();
     });

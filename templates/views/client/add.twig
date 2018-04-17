@@ -29,14 +29,16 @@
                 </div>
                 <div class="row">        
                     <div class="col-md-6">                
-                        {{ forms.input('text', 'Name', 'name', '85', client.get('name'), 'Put your name here!') }}
+                        {{ forms.input('text', 'Name', 'name', '85', client.get('name'), 'Put your name here!', fieldsErros) }}
                     </div>
                     <div class="col-md-6">                
-                        {{ forms.input('text', 'Phone', 'phone', '15', client.get('phone'), 'Put your phone here!') }}
+                        {{ forms.input('text', 'Phone', 'phone', '15', client.get('phone'), 'Put your phone here!', fieldsErros) }}
                     </div>                    
-                    <div class="col-md-1">                
-                        {{ forms.button('Add new Client') }}
-                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">                
+                        {{ forms.button('Add new Client', 'primary') }}
+                    </div>                    
                 </div>
             </form>        
         </div>            

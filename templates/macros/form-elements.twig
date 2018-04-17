@@ -1,25 +1,60 @@
-{% macro input(type, label, name, maxlenght, value, placeholder) %}
-  <div class="form-group">
-    <input type="{{ type|default('text') }}" id="{{name}}" name="{{ name }}" maxlength="{{ maxlenght|default(85) }}" value="{{ value|e }}" placeholder="{{placeholder|e}}" class="form-control" />
+{% macro input(type, label, name, maxlenght, value, placeholder, error) %}
+{% set classError = error[name] is iterable ? 'has-error has-feedback' : '' %}
+
+  <div class="form-group {{ classError }}">
+    <label class="control-label" for="{{ name }}">{{ label }}</label>
+    <input 
+        type="{{ type|default('text') }}" 
+        id="{{ name }}" 
+        name="{{ name }}" 
+        maxlength="{{ maxlenght|default(85) }}" 
+        value="{{ value|e }}" 
+        placeholder="{{ placeholder|e }}" 
+        class="form-control" />
+        <p class="control-label">
+            {% for key, value in error[name] %}
+                {{value}}
+            {% endfor %}
+        </p>
   </div>
 {% endmacro %}
 
-{% macro button(label) %}
-    <button class="btn btn-success">{{label}}</button>
+{% macro button(label, type) %}
+    {% 
+        set class = {
+            'primary': 'btn-primary',
+            'secondary': 'btn-secondary',
+            'success': 'btn-success', 
+            'danger': 'btn-danger', 
+            'warning': 'btn-warning',
+            'info': 'btn-info',
+            'light': 'btn-light',
+            'dark': 'btn-dark',
+            'link': 'btn-link',
+        }
+    %}
+
+    {% set classSelected = class[type] ? class[type] : 'btn-primary' %}
+    <button class="btn {{ classSelected }}">{{label}}</button>
 {% endmacro %}
 
 {% macro table(headers, dataObject) %}
     <table class="table table-striped">
         <thead>
             <tr>
-                {% for header in headers %}
-                <th>{{header}}</th>
+                <th style="width: 10%">Id</th>
+                {% for key, header in headers %}                    
+                    {% if key != "id" %}
+                        <th style="width: 30%">{{header}}</th>
+                    {% endif %}
                 {% endfor %}
+                <th style="width: 10%">Action</th>
             </tr>
         </thead>
         <tbody>
             {% for object in dataObject %}
             <tr>
+                <td>{{object.id}}</td>
                 {% for key,header in headers %}
                 <td>{{object[key]}}</td>
                 {% endfor %}
