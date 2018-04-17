@@ -1,16 +1,27 @@
 <?php
 namespace Controller;
+
 use Controller\AppController;
-use Cake\ORM\TableRegistry;
 use Model\Entity\Client;
+use Cake\ORM\TableRegistry;
+use Cake\Database\Expression\QueryExpression;
+use Cake\ORM\Query;
+
 
 class ClientController extends AppController
 {
     public function index()
     {
         $clients = TableRegistry::get('Clients');
+        
+        $listClients = $clients->find('all')
+            ->where(function (QueryExpression $exp, Query $q) {
+                $search = $this->request->getQueryParam('search');        
+                return $exp->like('name', "%$search%");
+        });
+            
         $this->view->render('/views/client/index.twig', [
-            'clients' => $clients->find(),
+            'clients' => $listClients,
             'success' => $this->request->getQueryParam('success'),
             'error' => $this->request->getQueryParam('error')
         ]);

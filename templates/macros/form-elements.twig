@@ -19,6 +19,27 @@
   </div>
 {% endmacro %}
 
+{% macro input_with_button_left(type, label, name, maxlenght, value, placeholder, buttonLabelAction, buttonLabelReset, linkReset) %}
+  <div class="input-group">    
+    <input 
+        type="{{ type|default('text') }}" 
+        id="{{ name }}" 
+        name="{{ name }}" 
+        maxlength="{{ maxlenght|default(85) }}" 
+        value="{{ value|e }}" 
+        placeholder="{{ placeholder|e }}" 
+        class="form-control" />
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn-primary">
+                <i class="glyphicon glyphicon-search"></i> {{ buttonLabelAction }}
+            </button>
+            <a href="{{ linkReset }}" class="btn btn-info" title="{{ buttonLabelReset }}">
+                <i class="glyphicon glyphicon-refresh"></i> {{ buttonLabelReset }}
+            </a>            
+        </span>    
+  </div>
+{% endmacro %}
+
 {% macro button(label, type) %}
     {% 
         set class = {

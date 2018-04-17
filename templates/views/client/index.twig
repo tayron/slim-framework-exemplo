@@ -26,20 +26,18 @@
     </div>    
     <div class="row">        
         <div class="col-md-12">
-            <form action="/clients/index" class="form" method="get">            
+            <form action="/clients/index" class="form form" method="get">            
                 <div class="row">        
-                    <div class="col-md-11">                
-                        {{ forms.input('text', 'Search', 'search', '3', null, 'Put your search here!') }}
-                    </div>
-                    <div class="col-md-1">                
-                        {{ forms.button('Search') }}
-                    </div>
+                    <div class="col-md-12">                
+                        {{ forms.input_with_button_left('text', 'Search', 'search', '3', null, 'Put your search here!', 'Search', 'Reset', '/clients/index') }}
+                    </div>                
                 </div>
             </form>        
         </div>            
     </div>
     <div class="row">
         <div class="col-md-12">
+            <br />
             {% set headers = {'name': 'Name', 'phone': 'Phone'} %}
             {{ forms.table(headers, clients) }}
         </div>          
